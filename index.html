@@ -15,6 +15,8 @@
 </head>
 <body>
 
+  <div id="scroll-progress"></div>
+
   <!-- ==================== LANG TOGGLE ==================== -->
   <div class="lang-toggle" role="group" aria-label="Langue / Language">
     <button data-target="fr" class="active" aria-label="Français">FR</button>
@@ -26,14 +28,15 @@
 
     <!-- Giant background name -->
     <h1 class="hero-bg-name" aria-label="Pascal Hoguet">
-      <span>PASCAL</span>
-      <span>HOGUET</span>
+      <span>Pascal</span>
+      <span>Hoguet</span>
     </h1>
 
     <div class="hero-layout">
 
       <!-- LEFT: Photo floating over name -->
       <div class="hero-left">
+        <canvas id="hero-particles"></canvas>
         <div class="hero-photo-wrap reveal">
           <img src="assets/portrait.png" alt="Pascal Hoguet" class="hero-portrait" />
         </div>
@@ -45,24 +48,24 @@
         <p class="hero-eyebrow reveal">
           <span class="eyebrow-role" data-lang="fr">Directeur de Projet</span>
           <span class="eyebrow-role" data-lang="en">Project Director</span>
-          <span data-lang="fr">Transformation Numérique<br>&amp; Intelligence Artificielle</span>
-          <span data-lang="en">Digital Transformation<br>&amp; Artificial Intelligence</span>
+          <span class="eyebrow-subtitle" data-lang="fr">Transformation Numérique &amp; Intelligence Artificielle</span>
+          <span class="eyebrow-subtitle" data-lang="en">Digital Transformation &amp; Artificial Intelligence</span>
         </p>
 
         <div class="hero-divider reveal reveal-delay-1"></div>
 
         <p class="hero-tagline reveal reveal-delay-1">
-          <span data-lang="fr">Manager senior expert en transformation numérique et IA — je vous accompagne dans la création de valeur avec l'intelligence artificielle, sans bullshit.</span>
-          <span data-lang="en">Senior manager expert in digital transformation and AI — I help you create real value with artificial intelligence, no bullshit.</span>
+          <span data-lang="fr">Manager senior spécialisé en transformation numérique et intelligence artificielle, j'accompagne les organisations dans la création de valeur grâce à l'IA et à l'automatisation des processus, avec une approche pragmatique orientée résultats.<br><br>Expert des thématiques territoriales, j'accompagne également les collectivités territoriales et opérateurs privés dans les programmes de territoire intelligent et durable.<br><br>Mon objectif : Mener des projets à impact et faire de chaque projet IA un levier de création de valeur mesurable.</span>
+          <span data-lang="en">Senior manager specialising in digital transformation and artificial intelligence, I help organisations create value through AI and process automation, with a pragmatic results-driven approach.<br><br>Expert in smart territory topics, I also support local authorities and private operators in connected and sustainable territory programmes.<br><br>My goal: to lead high-impact projects and make every AI initiative a measurable value creation driver.</span>
         </p>
 
         <!-- Stats -->
         <div class="hero-stats reveal reveal-delay-2">
           <div class="hero-stat">
-            <span class="stat-number">35+</span>
+            <span class="stat-number">25+</span>
             <span class="stat-label">
-              <span data-lang="fr">ans d'expérience</span>
-              <span data-lang="en">years of experience</span>
+              <span data-lang="fr">ans en direction</span>
+              <span data-lang="en">years in leadership</span>
             </span>
           </div>
           <div class="stat-sep"></div>
@@ -73,39 +76,51 @@
               <span data-lang="en">projects delivered</span>
             </span>
           </div>
-          <div class="stat-sep"></div>
-          <div class="hero-stat">
-            <span class="stat-number">3</span>
-            <span class="stat-label">
-              <span data-lang="fr">grandes ESN · Conseil</span>
-              <span data-lang="en">major consulting firms</span>
-            </span>
-          </div>
         </div>
 
         <!-- Current position -->
         <div class="hero-current reveal reveal-delay-2">
-          <span class="current-company">Onepoint</span>
-          <span class="current-sep">·</span>
-          <span class="current-role">
-            <span data-lang="fr">Head of Roadmap AI for Consulting</span>
-            <span data-lang="en">Head of AI for Consulting Roadmap</span>
-          </span>
+          <span class="current-company" data-lang="fr">Actuellement en poste chez Onepoint</span>
+          <span class="current-company" data-lang="en">Currently at Onepoint</span>
+          <ul class="current-roles">
+            <li>
+              <span data-lang="fr">Head of Roadmap AI for Consulting — programme Elio</span>
+              <span data-lang="en">Head of AI for Consulting Roadmap — programme Elio</span>
+            </li>
+            <li>
+              <span data-lang="fr">Direction de projet, conseil et expertise Territoires Connectés et Durables</span>
+              <span data-lang="en">Project direction, consulting and expertise in Connected and Sustainable Territories</span>
+            </li>
+          </ul>
         </div>
 
         <!-- Sectors -->
         <div class="hero-sectors reveal reveal-delay-3">
-          <span class="sector-tag">Public</span>
           <span class="sector-tag">
-            <span data-lang="fr">Privé</span>
-            <span data-lang="en">Private</span>
+            <span data-lang="fr">Secteur privé &amp; secteur public</span>
+            <span data-lang="en">Private &amp; public sector</span>
           </span>
-          <span class="sector-tag">Smart City</span>
-          <span class="sector-tag">IA &amp; Data</span>
           <span class="sector-tag">
-            <span data-lang="fr">Numérique responsable</span>
-            <span data-lang="en">Responsible Digital</span>
+            <span data-lang="fr">Data &amp; IA</span>
+            <span data-lang="en">Data &amp; AI</span>
           </span>
+          <span class="sector-tag">
+            <span data-lang="fr">Plateformes agentiques &amp; automatisation</span>
+            <span data-lang="en">Agentic platforms &amp; automation</span>
+          </span>
+          <span class="sector-tag">
+            <span data-lang="fr">Smart city &amp; smart building</span>
+            <span data-lang="en">Smart city &amp; smart building</span>
+          </span>
+        </div>
+
+        <!-- CTA -->
+        <div class="hero-cta reveal reveal-delay-3">
+          <a href="mailto:phoguet@protonmail.com" class="btn-contact">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <span data-lang="fr">Me contacter</span>
+            <span data-lang="en">Contact me</span>
+          </a>
         </div>
 
         <!-- Contact -->
@@ -140,14 +155,18 @@
         </p>
         <div class="profile-text reveal reveal-delay-1">
           <p data-lang="fr">
-            Manager senior, je suis expert des programmes de <span class="kw">transformation numérique des organisations publiques et privées</span>. Je vous apporte une expertise spécifique sur la <span class="kw">donnée</span>, l'<span class="kw">intelligence artificielle</span>, les usages métier et la <span class="kw">création de valeur avec l'IA</span>.<br><br>
-            Je pilote actuellement la <span class="kw">roadmap AI for consulting</span> de Onepoint. Je construis les offres, pilote les équipes opérationnelles et les engagements contractuels et financiers des projets.<br><br>
-            Je contribue au développement commercial, aux partenariats stratégiques, au recrutement et à l'organisation des services. J'interviens directement auprès de nos clients en conseil et direction de projet, ainsi qu'en formation et séminaires.
+            Je suis manager senior avec un double savoir-faire en <span class="kw">développement business</span> et <span class="kw">pilotage de P&amp;L</span>, associé à une solide expertise en <span class="kw">numérique et innovation</span>.<br><br>
+            J'accélère le développement commercial, mets en place les partenariats stratégiques et facilite le recrutement. Je déploie les services pour répondre aux engagements. J'interviens directement auprès de nos clients en conseil et direction de projet, ainsi qu'en formation et séminaires.<br><br>
+            Je suis expert des programmes de <span class="kw">transformation numérique des organisations publiques et privées</span>. Je vous apporte une expertise spécifique sur la <span class="kw">donnée</span>, l'<span class="kw">intelligence artificielle</span>, les usages métier et la <span class="kw">création de valeur avec l'IA</span>.<br><br>
+            Je pilote actuellement la <span class="kw">roadmap AI for consulting</span> de Onepoint qui a pour ambition la transformation du métier du conseil par la mise à disposition d'une <span class="kw">plateforme agentique</span> au service des consultants. Je construis les offres, pilote les équipes opérationnelles et les engagements contractuels et financiers des projets.<br><br>
+            J'accompagne également les territoires dans leur transformation numérique et pilote des <span class="kw">programmes à impact</span> auprès des acteurs publics et opérateurs privés.
           </p>
           <p data-lang="en">
-            Senior manager expert in <span class="kw">digital transformation programs for public and private organizations</span>. I bring specific expertise in <span class="kw">data</span>, <span class="kw">artificial intelligence</span>, business use cases and <span class="kw">value creation with AI</span>.<br><br>
-            I currently lead the <span class="kw">AI for consulting roadmap</span> at Onepoint. I build service offerings, manage operational teams, and oversee contractual and financial commitments.<br><br>
-            I contribute to business development, strategic partnerships, recruitment, and service organization. I engage directly with clients as consultant and project director, and deliver training and executive seminars.
+            I am a senior manager combining a dual skill set in <span class="kw">business development</span> and <span class="kw">P&amp;L management</span>, with solid expertise in <span class="kw">digital and innovation</span>.<br><br>
+            I accelerate business development, build strategic partnerships and support recruitment. I deploy services to meet commitments. I engage directly with clients as consultant and project director, and deliver training and executive seminars.<br><br>
+            I am an expert in <span class="kw">digital transformation programs for public and private organizations</span>, bringing specific expertise in <span class="kw">data</span>, <span class="kw">artificial intelligence</span>, business use cases and <span class="kw">value creation with AI</span>.<br><br>
+            I currently lead the <span class="kw">AI for consulting roadmap</span> at Onepoint, with the ambition of transforming the consulting profession by providing an <span class="kw">agentic platform</span> for consultants. I build service offerings, manage operational teams, and oversee contractual and financial commitments.<br><br>
+            I also support territories in their digital transformation, leading <span class="kw">high-impact programs</span> for public authorities and private operators.
           </p>
         </div>
       </div>
@@ -158,27 +177,53 @@
           <span data-lang="fr">Compétences</span>
           <span data-lang="en">Skills</span>
         </p>
-        <div class="skills-pills reveal reveal-delay-1">
-          <span class="pill" data-lang="fr">Pilotage opérationnel</span>
-          <span class="pill" data-lang="en">Operational Management</span>
-          <span class="pill" data-lang="fr">Direction de projet</span>
-          <span class="pill" data-lang="en">Project Direction</span>
-          <span class="pill" data-lang="fr">Transformation numérique</span>
-          <span class="pill" data-lang="en">Digital Transformation</span>
-          <span class="pill" data-lang="fr">IA & Data</span>
-          <span class="pill" data-lang="en">AI & Data</span>
-          <span class="pill" data-lang="fr">Territoires intelligents</span>
-          <span class="pill" data-lang="en">Smart Territories</span>
-          <span class="pill" data-lang="fr">Numérique responsable</span>
-          <span class="pill" data-lang="en">Responsible Digital</span>
-          <span class="pill" data-lang="fr">Delivery agile</span>
-          <span class="pill" data-lang="en">Agile Delivery</span>
-          <span class="pill" data-lang="fr">Développement commercial</span>
-          <span class="pill" data-lang="en">Business Development</span>
-          <span class="pill" data-lang="fr">Nocode & Plateformes</span>
-          <span class="pill" data-lang="en">Nocode & Platforms</span>
-          <span class="pill" data-lang="fr">Smart City & Smart Building</span>
-          <span class="pill" data-lang="en">Smart City & Smart Building</span>
+        <div class="skills-groups reveal reveal-delay-1">
+
+          <div class="skills-group">
+            <div class="skills-group-label" data-lang="fr">Pilotage &amp; Développement commercial</div>
+            <div class="skills-group-label" data-lang="en">Management &amp; Business Development</div>
+            <div class="skills-pills">
+              <span class="pill" data-lang="fr">Direction de projet à engagement</span>
+              <span class="pill" data-lang="en">Project &amp; Engagement Direction</span>
+              <span class="pill" data-lang="fr">Stratégie offres, développement commercial</span>
+              <span class="pill" data-lang="en">Offer Strategy &amp; Business Development</span>
+              <span class="pill" data-lang="fr">Démarches agile et Continuous Discovery &amp; Delivery</span>
+              <span class="pill" data-lang="en">Agile &amp; Continuous Discovery &amp; Delivery</span>
+              <span class="pill" data-lang="fr">Pilotage des équipes</span>
+              <span class="pill" data-lang="en">Team Management</span>
+            </div>
+          </div>
+
+          <div class="skills-group">
+            <div class="skills-group-label" data-lang="fr">Data &amp; Intelligence Artificielle</div>
+            <div class="skills-group-label" data-lang="en">Data &amp; Artificial Intelligence</div>
+            <div class="skills-pills">
+              <span class="pill" data-lang="fr">IA &amp; Data</span>
+              <span class="pill" data-lang="en">AI &amp; Data</span>
+              <span class="pill" data-lang="fr">Nocode &amp; Plateformes</span>
+              <span class="pill" data-lang="en">Nocode &amp; Platforms</span>
+              <span class="pill" data-lang="fr">Plateformes agentiques</span>
+              <span class="pill" data-lang="en">Agentic Platforms</span>
+              <span class="pill" data-lang="fr">Automatisations</span>
+              <span class="pill" data-lang="en">Automation</span>
+              <span class="pill" data-lang="fr">Vibe coding &amp; vibe designing</span>
+              <span class="pill" data-lang="en">Vibe coding &amp; vibe designing</span>
+            </div>
+          </div>
+
+          <div class="skills-group">
+            <div class="skills-group-label" data-lang="fr">Territoires intelligents &amp; durables</div>
+            <div class="skills-group-label" data-lang="en">Smart &amp; Sustainable Territories</div>
+            <div class="skills-pills">
+              <span class="pill" data-lang="fr">Gouvernance data et IA</span>
+              <span class="pill" data-lang="en">Data &amp; AI Governance</span>
+              <span class="pill" data-lang="fr">Accompagnement du territoire intelligent</span>
+              <span class="pill" data-lang="en">Smart Territory Advisory</span>
+              <span class="pill" data-lang="fr">Plateformes et hypervision urbaine</span>
+              <span class="pill" data-lang="en">Urban Platforms &amp; Hypervisor</span>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
@@ -226,7 +271,7 @@
         </div>
 
         <!-- ÉCOLE DES PONTS -->
-        <div class="timeline-entry teaching reveal">
+        <div class="timeline-entry reveal">
           <div class="entry-header">
             <span class="entry-company" data-lang="fr">École des Ponts ParisTech</span>
             <span class="entry-company" data-lang="en">École des Ponts ParisTech</span>
@@ -258,6 +303,10 @@
           <div class="entry-subrole">
             <div class="entry-role" data-lang="fr">Directeur Lab'Innovation <span style="color:var(--accent-muted);font-size:13px;">(2013 – 2015)</span></div>
             <div class="entry-role" data-lang="en">Innovation Lab Director <span style="color:var(--accent-muted);font-size:13px;">(2013 – 2015)</span></div>
+            <ul class="entry-bullets">
+              <li data-lang="fr">Développement d'une cellule orientée innovation et expérience utilisateurs.</li>
+              <li data-lang="en">Development of an innovation and user experience unit.</li>
+            </ul>
             <p class="entry-achievements" data-lang="fr">Réalisations : Banque Populaire, Macif, La Poste, Pôle Emploi.</p>
             <p class="entry-achievements" data-lang="en">Key clients: Banque Populaire, Macif, La Poste, Pôle Emploi.</p>
           </div>
@@ -297,8 +346,16 @@
             <span class="entry-date" data-lang="fr">Strasbourg / Nantes, 1996 – 2005</span>
             <span class="entry-date" data-lang="en">Strasbourg / Nantes, 1996 – 2005</span>
           </div>
-          <div class="entry-role" data-lang="fr">Directeur BU Enterprise Content Management (3 M€) · Directeur commercial industrie · Chef puis Directeur de projet Grands Comptes · Développement agence Luxembourg</div>
-          <div class="entry-role" data-lang="en">BU Director Enterprise Content Management (€3M) · Industry Sales Director · Project Manager then Key Account Project Director · Luxembourg office development</div>
+          <ul class="entry-bullets">
+            <li data-lang="fr">Directeur Business Unit Enterprise Content Management (3 M€)</li>
+            <li data-lang="en">Business Unit Director – Enterprise Content Management (€3M)</li>
+            <li data-lang="fr">Directeur commercial industrie (3 M€) – Direction Opérationnelle EST</li>
+            <li data-lang="en">Industry Sales Director (€3M) – Eastern Regional Operations</li>
+            <li data-lang="fr">Chef de projet puis Directeur de projet Grands Comptes</li>
+            <li data-lang="en">Project Manager then Key Account Project Director</li>
+            <li data-lang="fr">Développement de l'agence Luxembourg (BEI, BGL)</li>
+            <li data-lang="en">Luxembourg office development (EIB, BGL)</li>
+          </ul>
         </div>
 
         <!-- ALCATEL -->
@@ -321,6 +378,8 @@
           </div>
           <div class="entry-role" data-lang="fr">Ingénieur études et développement</div>
           <div class="entry-role" data-lang="en">Software Development Engineer</div>
+          <p class="entry-condensed" data-lang="fr">Développement logiciel en équipes franco-britanniques — première expérience internationale (Vélizy & Bracknell, UK).</p>
+          <p class="entry-condensed" data-lang="en">Software development in Franco-British teams — first international experience (Vélizy & Bracknell, UK).</p>
         </div>
 
       </div><!-- /timeline -->
@@ -432,13 +491,11 @@
 
       <!-- Contact -->
       <div>
-        <p class="section-label reveal">Contact</p>
+        <p class="section-label reveal">
+          <span data-lang="fr">Contact</span>
+          <span data-lang="en">Contact</span>
+        </p>
         <div class="contact-list reveal reveal-delay-1">
-          <div class="contact-item">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            <span data-lang="fr">14 route de Chambord<br>41350 Huisseau-sur-Cosson</span>
-            <span data-lang="en">14 route de Chambord<br>41350 Huisseau-sur-Cosson, France</span>
-          </div>
           <div class="contact-item">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.61 1.18h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.29 6.29l.44-.44a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21.73 17z"/></svg>
             <span>+33 6 46 20 55 26</span>

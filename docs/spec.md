@@ -35,16 +35,34 @@ Style **Dark Hero Magazine** : fond bleu nuit profond, typographie haut de gamme
 ## Sections
 
 ### 1. Hero
-Layout flex : photo gauche (40%) + identité droite (60%).
+Layout flex desktop : colonne gauche 42% (photo) + colonne droite flex:1 (identité).
 
-- **Photo** : grande, `border-radius: 8px`, halo bleu diffus (`box-shadow: 0 0 60px rgba(59,130,246,0.3)`)
-- **Nom** : PASCAL HOGUET — Playfair Display 52px blanc bold
-- **Séparateur** : ligne fine bleu électrique
-- **Titre** : Inter 17px `--accent-muted`, letterspacing 3px, capitales
-- **Accroche FR** : "Manager senior expert en transformation numérique et IA — j'accompagne les entreprises publiques et privées dans la création de valeur avec l'intelligence artificielle."
-- **Accroche EN** : "Senior manager expert in digital transformation and AI — I help public and private organizations create value with artificial intelligence."
-- **Toggle FR/EN** : position absolute top-right, boutons texte, actif en bleu
-- **Contact** : icônes SVG + texte `--text-muted` (adresse, tél, email, LinkedIn)
+#### Bandeau nom — `.hero-bg-name`
+- `position: absolute; top: 48px; left: 0; width: 42%` — centré sur la colonne gauche
+- Playfair Display, `clamp(28px, 3.2vw, 48px)`, blanc 92%, fond semi-transparent `rgba(6,11,24,0.55)` + `backdrop-filter: blur(6px)`
+- Sur mobile (≤ 900px) : `position: relative`, pleine largeur, centré, sans fond
+
+#### Colonne gauche — `.hero-left`
+- `flex: 0 0 42%`
+- Photo portrait : `border-radius` via mask-image elliptique, halo bleu `drop-shadow`
+
+#### Colonne droite — `.hero-right`
+- `padding: 36px 90px 32px 16px` (90px à droite pour dégager le toggle FR/EN)
+- **Titre** : "DIRECTEUR DE PROJET" + "TRANSFORMATION NUMÉRIQUE & INTELLIGENCE ARTIFICIELLE" — Inter 18px, uppercase, letter-spacing 2px, `var(--accent)`
+- **Séparateur** : 64px × 2px, dégradé bleu
+- **Accroche FR** (3 paragraphes, 14px italic, line-height 1.55) :
+  1. "Manager senior spécialisé en transformation numérique et intelligence artificielle, j'accompagne les organisations dans la création de valeur grâce à l'IA et à l'automatisation des processus, avec une approche pragmatique orientée résultats."
+  2. "Expert des thématiques territoriales, j'accompagne également les collectivités territoriales et opérateurs privés dans les programmes de territoire intelligent et durable."
+  3. "Mon objectif : Mener des projets à impact et faire de chaque projet IA un levier de création de valeur mesurable."
+- **Accroche EN** : même structure en anglais
+- **Stats** : 2 blocs — 35+ ans d'expérience · 50+ projets pilotés (Playfair 32px)
+- **Poste actuel** : badge "Actuellement en poste chez Onepoint" + liste 2 rôles :
+  - Head of Roadmap AI for Consulting — programme Elio
+  - Direction de projet, conseil et expertise Territoires Connectés et Durables
+- **Tags secteurs** (4) : Secteur privé & secteur public · Data & IA · Plateformes agentiques & automatisation · Smart city & smart building
+- **Bouton CTA** : "Me contacter" / "Contact me" → `mailto:phoguet@protonmail.com`
+- **Contact** : icônes SVG — tél, email, LinkedIn (gap 28px)
+- **Toggle FR/EN** : `position: fixed; top: 56px; right: 32px; z-index: 100`
 
 ### 2. Profil + Compétences
 Layout 2 colonnes 60/40, fond `--bg-section`.
@@ -93,6 +111,16 @@ Layout 3 colonnes égales, fond `--bg-medium`.
 ## Animations
 
 **Intersection Observer API** : classe `.reveal` sur chaque section et entrée timeline. À l'entrée dans le viewport : `.reveal.visible` → `opacity 0→1`, `translateY 20px→0`, `transition: 0.5s ease`. Délais échelonnés (`transition-delay`) sur les enfants directs.
+
+---
+
+## Responsive
+
+| Breakpoint | Comportement |
+|---|---|
+| `> 900px` | Desktop : layout 2 colonnes, nom en bandeau absolu sur colonne gauche |
+| `≤ 900px` | Tablet : layout colonne unique, nom en bandeau relatif pleine largeur en haut, puis photo, puis contenu |
+| `≤ 600px` | Mobile : même structure, tailles et paddings réduits |
 
 ---
 
