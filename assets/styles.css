@@ -62,11 +62,17 @@ a:hover { color: var(--accent-light); }
 /* =========================================================
    LANG TOGGLE
    ========================================================= */
-.lang-toggle {
+.top-right-controls {
   position: fixed;
   top: 56px;
   right: 32px;
   z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.lang-toggle {
   display: flex;
   gap: 4px;
   background: rgba(6, 11, 24, 0.85);
@@ -818,7 +824,7 @@ footer p {
 
   .profile-grid { grid-template-columns: 1fr; gap: 40px; }
   .bottom-grid { grid-template-columns: 1fr; gap: 40px; }
-  .lang-toggle { top: 12px; right: 12px; }
+  .top-right-controls { top: 12px; right: 12px; }
 }
 
 /* ---- Mobile ≤ 600px ---- */
@@ -869,7 +875,7 @@ footer p {
     font-size: 11pt;
   }
 
-  .lang-toggle { display: none !important; }
+  .top-right-controls { display: none !important; }
   [data-lang="en"] { display: none !important; }
 
   .reveal {
@@ -953,7 +959,6 @@ footer p {
   .interest-label { color: #555 !important; }
   .contact-list .contact-item { color: #333 !important; }
 
-  #pdf-export-btn { display: none !important; }
   footer { display: none; }
 
   .timeline-entry { page-break-inside: avoid; }
@@ -986,30 +991,24 @@ footer p {
 }
 
 #pdf-export-btn {
-  position: fixed;
-  bottom: 88px;
-  right: 24px;
-  z-index: 150;
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 10px 18px;
-  border: none;
-  border-radius: 50px;
-  background: var(--accent);
-  color: var(--text-primary);
-  font-family: var(--font-sans);
-  font-size: 13px;
-  font-weight: 600;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  background: rgba(6, 11, 24, 0.85);
+  border: 1px solid rgba(59, 130, 246, 0.25);
+  border-radius: 6px;
+  color: var(--text-muted);
   cursor: pointer;
-  box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
-  transition: filter 0.2s ease, box-shadow 0.2s ease;
-  white-space: nowrap;
+  transition: color 0.2s, border-color 0.2s;
+  backdrop-filter: blur(8px);
+  padding: 0;
 }
 
 #pdf-export-btn:hover {
-  filter: brightness(1.15);
-  box-shadow: 0 0 28px rgba(59, 130, 246, 0.7);
+  color: var(--accent-light);
+  border-color: rgba(59, 130, 246, 0.6);
 }
 
 #chat-panel {
@@ -1183,11 +1182,8 @@ footer p {
     right: 16px;
   }
 
-  #pdf-export-btn {
-    bottom: 80px;
-    right: 16px;
-  }
 }
+
 
 /* Print: hide chat widget */
 @media print {
