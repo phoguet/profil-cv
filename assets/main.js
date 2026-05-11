@@ -192,9 +192,9 @@
       return div;
     }
 
-    /* HELPER: read active language from the existing toggle */
+    /* HELPER: read active language from the DOM (setLang sets document.documentElement.lang) */
     function getActiveLang() {
-      return currentLang; /* uses the variable already maintained by setLang() */
+      return document.documentElement.lang || 'fr';
     }
 
     /* HELPER: sync input placeholder with current language */
@@ -239,11 +239,11 @@
       /* Session limit check */
       const count = parseInt(sessionStorage.getItem('chat_msg_count') || '0', 10);
       if (count >= 10) {
-        const lang = getActiveLang();
-        const limitMsg = lang === 'en'
+        appendMessage('bot', getActiveLang() === 'en'
           ? 'Session ended. For more information, contact Pascal directly.'
-          : 'Session terminée. Pour en savoir plus, contactez Pascal directement.';
-        appendMessage('bot', limitMsg);
+          : 'Session terminée. Pour en savoir plus, contactez Pascal directement.');
+        chatSend.disabled = true;
+        chatInput.disabled = true;
         return;
       }
 
@@ -303,7 +303,10 @@
     /* EVENT LISTENERS */
     chatSend.addEventListener('click', sendChatMessage);
     chatInput.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') sendChatMessage();
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        sendChatMessage();
+      }
     });
   })();
 
