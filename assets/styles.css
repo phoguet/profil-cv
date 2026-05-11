@@ -136,7 +136,7 @@ a:hover { color: var(--accent-light); }
   gap: 0.3em;
   justify-content: center;
   align-items: center;
-  width: 42%;
+  width: 34%;
   padding: 18px 24px;
   font-family: var(--font-serif);
   font-size: clamp(28px, 3.2vw, 48px);
@@ -163,7 +163,7 @@ a:hover { color: var(--accent-light); }
 
 /* ---- Left: photo over name ---- */
 .hero-left {
-  flex: 0 0 42%;
+  flex: 0 0 34%;
   position: relative;
   display: flex;
   align-items: center;
