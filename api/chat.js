@@ -1,8 +1,8 @@
-import fs from 'fs'
-import path from 'path'
-import Anthropic from '@anthropic-ai/sdk'
+const fs = require('fs')
+const path = require('path')
+const Anthropic = require('@anthropic-ai/sdk')
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*')
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS')
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
@@ -22,6 +22,10 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Le champ "message" est requis.' })
     }
 
+    if (message.length > 2000) {
+      return res.status(400).json({ error: 'Message trop long.' })
+    }
+
     const cvPath = path.join(__dirname, '../assets/cv-data.md')
     const cvContent = fs.readFileSync(cvPath, 'utf-8')
 
@@ -36,7 +40,11 @@ Sois concis : 3 à 5 phrases maximum par réponse.
 === CONTENU DU CV ===
 ${cvContent}`
 
-    const recentHistory = Array.isArray(history) ? history.slice(-6) : []
+    const recentHistory = Array.isArray(history)
+      ? history
+          .filter(m => (m.role === 'user' || m.role === 'assistant') && typeof m.content === 'string')
+          .slice(-6)
+      : []
 
     const messages = [
       ...recentHistory,
@@ -52,11 +60,11 @@ ${cvContent}`
       messages
     })
 
-    const reply = response.content[0].text
+    const reply = response.content?.[0]?.text ?? ''
 
     return res.status(200).json({ reply })
   } catch (err) {
     console.error('[api/chat] error:', err)
-    return res.status(500).json({ error: 'Une erreur s\'est produite.' })
+    return res.status(500).json({ error: "Une erreur s'est produite." })
   }
 }
