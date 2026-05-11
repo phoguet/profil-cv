@@ -327,4 +327,10 @@
     });
   })();
 
+  /* ---- PDF export ---- */
+  const pdfBtn = document.getElementById('pdf-export-btn');
+  if (pdfBtn) {
+    pdfBtn.addEventListener('click', () => window.print());
+  }
+
 })();
