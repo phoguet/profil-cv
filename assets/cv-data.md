@@ -3,7 +3,7 @@
 ## Identité
 - Titre : Directeur de Projet, Transformation Numérique & Intelligence Artificielle
 - Email : phoguet@protonmail.com
-- Tél : [disponible sur demande]
+- Tél : +33 6 46 20 55 26
 - LinkedIn : https://www.linkedin.com/pub/pascal-hoguet/a/6a4/1a4
 - Poste actuel : Onepoint (depuis 2019)
 
