@@ -128,12 +128,13 @@ a:hover { color: var(--accent-light); }
   position: absolute;
   top: 0;
   left: 0;
-  width: 58%;
-  padding: 18px 28px 0;
+  width: 34%;
+  padding: 16px 20px 0;
   display: flex;
   flex-direction: column;
   gap: 0;
   align-items: flex-start;
+  overflow: hidden;
   user-select: none;
   pointer-events: none;
   z-index: 1; /* behind the photo */
@@ -142,12 +143,13 @@ a:hover { color: var(--accent-light); }
 .hero-bg-name span:first-child,
 .hero-bg-name span:last-child {
   font-family: var(--font-sans);
-  font-size: clamp(64px, 12.5vw, 175px);
+  font-size: clamp(44px, 8vw, 115px);
   font-weight: 800;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.90);
-  letter-spacing: -4px;
+  letter-spacing: -3px;
   line-height: 0.88;
+  white-space: nowrap;
 }
 
 /* ---- Main layout ---- */
