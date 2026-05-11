@@ -286,22 +286,22 @@
         } else {
           if (typingDiv.parentNode) typingDiv.remove();
           const errMsg = res.status === 429
-            ? (lang === ‘en’
-                ? ‘Too many requests. Please try again in an hour.’
-                : ‘Trop de requêtes. Réessayez dans une heure.’)
-            : (lang === ‘en’
-                ? ‘An error occurred. Please try again in a moment.’
-                : "Une erreur s’est produite. Réessayez dans un instant.");
-          appendMessage(‘bot’, errMsg);
+            ? (lang === 'en'
+                ? 'Too many requests. Please try again in an hour.'
+                : 'Trop de requêtes. Réessayez dans une heure.')
+            : (lang === 'en'
+                ? 'An error occurred. Please try again in a moment.'
+                : "Une erreur s'est produite. Réessayez dans un instant.");
+          appendMessage('bot', errMsg);
           return;
         }
       } catch (_err) {
         /* Remove typing indicator if still present */
         if (typingDiv.parentNode) typingDiv.remove();
-        const errMsg = lang === ‘en’
-          ? ‘An error occurred. Please try again in a moment.’
-          : "Une erreur s’est produite. Réessayez dans un instant.";
-        appendMessage(‘bot’, errMsg);
+        const errMsg = lang === 'en'
+          ? 'An error occurred. Please try again in a moment.'
+          : "Une erreur s'est produite. Réessayez dans un instant.";
+        appendMessage('bot', errMsg);
       } finally {
         chatLoading = false;
         chatSend.disabled = false;
