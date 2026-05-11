@@ -62,7 +62,7 @@ Layout flex desktop : colonne gauche 34% (photo) + colonne droite flex:1 (identi
 - **Tags secteurs** (4) : Secteur privé & secteur public · Data & IA · Plateformes agentiques & automatisation · Smart city & smart building
 - **Bouton CTA** : "Me contacter" / "Contact me" → `mailto:phoguet@protonmail.com`
 - **Contact** : icônes SVG — tél, email, LinkedIn (gap 28px)
-- **Toggle FR/EN** : `position: fixed; top: 56px; right: 32px; z-index: 100`
+- **Contrôles top-right** : wrapper `.top-right-controls` — `position: fixed; top: 56px; right: 32px; z-index: 100; display: flex; align-items: center; gap: 8px` — contient le picto PDF + le toggle FR/EN
 
 ### 2. Profil + Compétences
 Layout 2 colonnes 60/40, fond `--bg-section`.
@@ -195,17 +195,17 @@ Navigateur → POST /api/chat → Vercel Function → Claude Haiku 3.5
 
 ---
 
-## Bouton export PDF
+## Picto export PDF
 
-Bouton flottant fixe, positionné au-dessus du widget chatbot.
+Icône téléchargement intégrée dans la barre `.top-right-controls`, à gauche du toggle FR/EN.
 
-- **HTML** : `<button id="pdf-export-btn">` avec icône SVG document (16×16) + spans `data-lang` bilingues
-- **Position desktop** : `position: fixed; bottom: 88px; right: 24px; z-index: 150`
-- **Position mobile (≤600px)** : `bottom: 80px; right: 16px`
-- **Style** : pill `border-radius: 50px`, fond `var(--accent)`, même box-shadow que `#chat-toggle`
+- **HTML** : `<button id="pdf-export-btn">` avec SVG flèche-bas + barre (16×16), `title="Télécharger PDF"`, pas de label texte
+- **Position** : dans `.top-right-controls` — hérite du positionnement fixe top-right du wrapper
+- **Style** : carré 30×30px, `border-radius: 6px`, même fond verre dépoli + bordure bleue que le toggle (`background: rgba(6,11,24,0.85)`, `border: 1px solid rgba(59,130,246,0.25)`, `backdrop-filter: blur(8px)`)
+- **Couleur icône** : `var(--text-muted)` au repos → `var(--accent-light)` au hover, bordure intensifiée
 - **Comportement** : clic → `window.print()` → boîte de dialogue impression/PDF du navigateur
-- **Langue** : label "Exporter PDF" (FR) / "Export PDF" (EN), géré automatiquement par `setLang()`
-- **Impression** : masqué via `@media print { display: none !important }`
+- **Pas de label bilingue** : icône seule, `title` pour l'accessibilité
+- **Impression** : masqué via `.top-right-controls { display: none !important }` dans `@media print`
 
 ---
 
