@@ -39,7 +39,7 @@ Layout flex desktop : colonne gauche 34% (photo) + colonne droite flex:1 (identi
 
 #### Nom — `.hero-bg-name` (style magazine cover)
 - Élément `<h1>` placé **à l'intérieur de `.hero-left`** (référentiel = colonne gauche)
-- `position: absolute; bottom: 8%; left: 0; right: 0` — couvre toute la largeur de la colonne, centré horizontalement
+- `position: absolute; bottom: calc(8% + 1cm); left: 0; right: 0` — couvre toute la largeur de la colonne, centré horizontalement
 - `z-index: 1` — derrière le portrait (`.hero-photo-wrap` est à `z-index: 2`)
 - `align-items: center; flex-direction: column; gap: 6px`
 - Span 1 "Pascal" : Inter 800, `clamp(22px, 4vw, 58px)`, `text-transform: none`, blanc, `text-shadow: 0 2px 16px rgba(0,0,0,0.7)`
@@ -49,7 +49,7 @@ Layout flex desktop : colonne gauche 34% (photo) + colonne droite flex:1 (identi
 #### Colonne gauche — `.hero-left`
 - `flex: 0 0 34%`, `position: relative`
 - Contenu dans l'ordre DOM : `<canvas id="hero-particles">` + `.hero-bg-name` + `.hero-photo-wrap`
-- Photo portrait : mask-image elliptique, halo bleu `drop-shadow`, `z-index: 2`
+- Photo portrait : mask-image elliptique, halo bleu `drop-shadow`, `z-index: 2`, `margin-top: 1cm`
 - `<canvas id="hero-particles">` positionné en absolu — 50 particules bleues double passe, z-index 0
 
 #### Colonne droite — `.hero-right`
@@ -192,6 +192,20 @@ Navigateur → POST /api/chat → Vercel Function → Claude Haiku 3.5
 - Le numéro de téléphone **est présent** dans `cv-data.md` : `+33 6 46 20 55 26`
 - La date de naissance **est présente** dans `cv-data.md` : 27 décembre 1966
 - Pour tester en local : `vercel dev` + `.env.local` contenant `ANTHROPIC_API_KEY=sk-ant-...`
+
+---
+
+## Bouton export PDF
+
+Bouton flottant fixe, positionné au-dessus du widget chatbot.
+
+- **HTML** : `<button id="pdf-export-btn">` avec icône SVG document (16×16) + spans `data-lang` bilingues
+- **Position desktop** : `position: fixed; bottom: 88px; right: 24px; z-index: 150`
+- **Position mobile (≤600px)** : `bottom: 80px; right: 16px`
+- **Style** : pill `border-radius: 50px`, fond `var(--accent)`, même box-shadow que `#chat-toggle`
+- **Comportement** : clic → `window.print()` → boîte de dialogue impression/PDF du navigateur
+- **Langue** : label "Exporter PDF" (FR) / "Export PDF" (EN), géré automatiquement par `setLang()`
+- **Impression** : masqué via `@media print { display: none !important }`
 
 ---
 
