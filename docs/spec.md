@@ -27,29 +27,33 @@ Style **Dark Hero Magazine** : fond bleu nuit profond, typographie haut de gamme
 | `--text-muted` | `#94A3B8` | Texte secondaire, contact |
 
 ### Typographie
-- **Playfair Display** (Google Fonts, serif) : nom, titres de section
-- **Inter** (Google Fonts, sans-serif) : corps, labels, tags, titres de poste
+- **Playfair Display** (Google Fonts, serif) : titres de section, stats
+- **Inter** (Google Fonts, sans-serif, weights 300/400/500/600/700/800) : corps, labels, tags, titres de poste, **nom hero**
 
 ---
 
 ## Sections
 
 ### 1. Hero
-Layout flex desktop : colonne gauche 42% (photo) + colonne droite flex:1 (identité).
+Layout flex desktop : colonne gauche 34% (photo) + colonne droite flex:1 (identité).
 
-#### Bandeau nom — `.hero-bg-name`
-- `position: absolute; top: 48px; left: 0; width: 42%` — centré sur la colonne gauche
-- Playfair Display, `clamp(28px, 3.2vw, 48px)`, blanc 92%, fond semi-transparent `rgba(6,11,24,0.55)` + `backdrop-filter: blur(6px)`
-- Texte en casse normale : "Pascal Hoguet"
-- Sur mobile (≤ 900px) : `position: relative`, pleine largeur, centré, sans fond
+#### Nom — `.hero-bg-name` (style magazine cover)
+- Élément `<h1>` placé **à l'intérieur de `.hero-left`** (référentiel = colonne gauche)
+- `position: absolute; bottom: 8%; left: 0; right: 0` — couvre toute la largeur de la colonne, centré horizontalement
+- `z-index: 1` — derrière le portrait (`.hero-photo-wrap` est à `z-index: 2`)
+- `align-items: center; flex-direction: column; gap: 6px`
+- Span 1 "Pascal" : Inter 800, `clamp(22px, 4vw, 58px)`, `text-transform: none`, blanc, `text-shadow: 0 2px 16px rgba(0,0,0,0.7)`
+- Span 2 "Hoguet" : Inter 800, `clamp(22px, 4vw, 58px)`, `text-transform: uppercase`, même style
+- Pas de fond, pas de backdrop-filter
 
 #### Colonne gauche — `.hero-left`
-- `flex: 0 0 42%`
-- Photo portrait : `border-radius` via mask-image elliptique, halo bleu `drop-shadow`
-- `<canvas id="hero-particles">` positionné en absolu dans `.hero-left` — 50 particules bleues avec double passe (halo extérieur + cœur brillant), confinées à la colonne portrait
+- `flex: 0 0 34%`, `position: relative`
+- Contenu dans l'ordre DOM : `<canvas id="hero-particles">` + `.hero-bg-name` + `.hero-photo-wrap`
+- Photo portrait : mask-image elliptique, halo bleu `drop-shadow`, `z-index: 2`
+- `<canvas id="hero-particles">` positionné en absolu — 50 particules bleues double passe, z-index 0
 
 #### Colonne droite — `.hero-right`
-- `padding: 36px 90px 32px 16px` (90px à droite pour dégager le toggle FR/EN)
+- `padding: 68px 90px 32px 16px` (90px à droite pour dégager le toggle FR/EN)
 - **Titre** : "DIRECTEUR DE PROJET" + "TRANSFORMATION NUMÉRIQUE & INTELLIGENCE ARTIFICIELLE" — Inter 18px, uppercase, letter-spacing 2px, `var(--accent)`
 - **Séparateur** : 64px × 2px, dégradé bleu
 - **Accroche** : 3 paragraphes, 14px italic, line-height 1.55
@@ -166,16 +170,27 @@ Navigateur → POST /api/chat → Vercel Function → Claude Haiku 3.5
 
 ### Comportement
 
-- Widget fixe bottom-right (`z-index: 200`), s'ouvre/ferme par clic
+- Widget fixe bottom-right (`z-index: 200`), bouton libellé **"Assistant IA"** (FR) / **"AI Assistant"** (EN)
 - Langue automatique : suit le toggle FR/EN de la page
-- Scope restreint : le system prompt interdit les réponses hors CV
-- Rate limiting : 10 messages/session via `sessionStorage` — au-delà, input désactivé
+- Scope restreint : system prompt interdit les réponses hors CV
+- Rate limiting client : 10 messages/session via `sessionStorage` — au-delà, input désactivé
 - Historique : 6 derniers échanges envoyés à chaque requête (`max_tokens: 400`)
+- Ton : vouvoiement obligatoire en français, format texte brut (pas de markdown, tirets, astérisques, emoji)
+- Date du jour injectée dans le system prompt (`new Date().toLocaleDateString('fr-FR', ...)`) pour garantir le calcul d'âge correct
+
+### Guardrails de sécurité (`api/chat.js`)
+
+1. **Rate limiting serveur** : 20 req/heure par IP (Map en mémoire, TTL 1h)
+2. **Validation message** : champ requis, type string, longueur max 500 chars
+3. **Détection injection** : 10 patterns regex (ignore instructions, jailbreak, system prompt, new role…) → 400
+4. **Whitelist langue** : `language` jamais interpolé directement — ternaire strict `=== 'en' ? 'anglais' : 'français'`
+5. **Validation historique** : rôles autorisés ∈ {user, assistant}, content string, longueur ≤ 500 par entrée, slice(-6)
 
 ### Maintenance
 
 - Toute modification du contenu CV doit être répercutée dans `assets/cv-data.md`
-- Le numéro de téléphone n'est PAS dans `cv-data.md` (remplacé par `[disponible sur demande]`)
+- Le numéro de téléphone **est présent** dans `cv-data.md` : `+33 6 46 20 55 26`
+- La date de naissance **est présente** dans `cv-data.md` : 27 décembre 1966
 - Pour tester en local : `vercel dev` + `.env.local` contenant `ANTHROPIC_API_KEY=sk-ant-...`
 
 ---
