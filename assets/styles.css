@@ -133,7 +133,7 @@ a:hover { color: var(--accent-light); }
   display: flex;
   flex-direction: column;
   gap: 6px;
-  align-items: flex-start;
+  align-items: center;
   user-select: none;
   pointer-events: none;
   z-index: 1; /* behind the photo */
