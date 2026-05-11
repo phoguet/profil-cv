@@ -1,6 +1,7 @@
 # Pascal Hoguet — CV
 
 ## Identité
+- Date de naissance : 27 décembre 1966
 - Titre : Directeur de Projet, Transformation Numérique & Intelligence Artificielle
 - Email : phoguet@protonmail.com
 - Tél : +33 6 46 20 55 26
