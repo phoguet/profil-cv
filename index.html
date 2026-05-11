@@ -519,6 +519,30 @@
     <p>© Pascal Hoguet · 2026</p>
   </footer>
 
+  <!-- ==================== CHATBOT WIDGET ==================== -->
+  <button id="chat-toggle" aria-label="Assistant CV / CV Assistant">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+    </svg>
+  </button>
+
+  <div id="chat-panel" role="dialog" aria-modal="true" aria-label="Assistant CV">
+    <div id="chat-header">
+      <span data-lang="fr">Assistant CV</span>
+      <span data-lang="en" style="display:none">CV Assistant</span>
+      <button id="chat-close" aria-label="Fermer / Close">&#x2715;</button>
+    </div>
+    <div id="chat-messages" aria-live="polite" aria-atomic="false"></div>
+    <div id="chat-input-row">
+      <input id="chat-input" type="text" maxlength="300"
+        placeholder="Posez une question…"
+        autocomplete="off"
+        data-placeholder-fr="Posez une question sur mon parcours…"
+        data-placeholder-en="Ask about my background…" />
+      <button id="chat-send" aria-label="Envoyer / Send">&#x2192;</button>
+    </div>
+  </div>
+
   <script src="assets/main.js"></script>
 </body>
 </html>

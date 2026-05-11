@@ -165,4 +165,149 @@
     });
   }
 
+  /* ---- Chatbot widget ---- */
+  (function () {
+    /* STATE */
+    let chatHistory = [];
+    let chatLoading = false;
+
+    /* DOM refs */
+    const chatPanel  = document.getElementById('chat-panel');
+    const chatToggle = document.getElementById('chat-toggle');
+    const chatClose  = document.getElementById('chat-close');
+    const chatInput  = document.getElementById('chat-input');
+    const chatSend   = document.getElementById('chat-send');
+    const chatMsgs   = document.getElementById('chat-messages');
+
+    if (!chatPanel || !chatToggle || !chatClose || !chatInput || !chatSend || !chatMsgs) return;
+
+    /* HELPER: append a message bubble */
+    function appendMessage(role, text, extraClass) {
+      const div = document.createElement('div');
+      div.classList.add('chat-msg', role);
+      if (extraClass) div.classList.add(extraClass);
+      div.textContent = text;
+      chatMsgs.appendChild(div);
+      chatMsgs.scrollTop = chatMsgs.scrollHeight;
+      return div;
+    }
+
+    /* HELPER: read active language from the DOM (setLang sets document.documentElement.lang) */
+    function getActiveLang() {
+      return document.documentElement.lang || 'fr';
+    }
+
+    /* HELPER: sync input placeholder with current language */
+    function syncPlaceholder() {
+      const lang = getActiveLang();
+      const key = lang === 'en' ? 'placeholderEn' : 'placeholderFr';
+      const value = chatInput.dataset[key] || chatInput.getAttribute('data-placeholder-' + lang);
+      if (value) chatInput.placeholder = value;
+    }
+
+    /* INIT */
+    syncPlaceholder();
+
+    const welcomeFr = 'Bonjour ! Je peux répondre à vos questions sur le parcours et les compétences de Pascal Hoguet.';
+    const welcomeEn = "Hello! I can answer questions about Pascal Hoguet’s background and skills.";
+    appendMessage('bot', getActiveLang() === 'en' ? welcomeEn : welcomeFr);
+
+    /* OPEN / CLOSE */
+    chatToggle.addEventListener('click', () => {
+      const isOpen = chatPanel.classList.toggle('open');
+      if (isOpen) chatInput.focus();
+    });
+
+    chatClose.addEventListener('click', () => {
+      chatPanel.classList.remove('open');
+    });
+
+    /* SYNC PLACEHOLDER when lang toggle changes — second independent listener */
+    document.querySelectorAll('.lang-toggle button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        /* setLang() runs first (registered earlier), so currentLang is already updated */
+        syncPlaceholder();
+      });
+    });
+
+    /* SEND MESSAGE */
+    async function sendChatMessage() {
+      if (!chatInput || chatLoading) return;
+      const userText = chatInput.value.trim();
+      if (!userText) return;
+
+      /* Session limit check */
+      const count = parseInt(sessionStorage.getItem('chat_msg_count') || '0', 10);
+      if (count >= 10) {
+        appendMessage('bot', getActiveLang() === 'en'
+          ? 'Session ended. For more information, contact Pascal directly.'
+          : 'Session terminée. Pour en savoir plus, contactez Pascal directement.');
+        chatSend.disabled = true;
+        chatInput.disabled = true;
+        return;
+      }
+
+      const lang = getActiveLang();
+
+      /* Append user bubble */
+      appendMessage('user', userText);
+      chatInput.value = '';
+
+      /* Set loading state */
+      chatLoading = true;
+      chatSend.disabled = true;
+
+      /* Typing indicator */
+      const typingDiv = appendMessage('bot', '…', 'typing');
+
+      try {
+        const res = await fetch('/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            message: userText,
+            language: lang,
+            history: chatHistory.slice(-6),
+          }),
+        });
+
+        typingDiv.remove();
+
+        if (res.ok) {
+          const data = await res.json();
+          if (data && data.reply) {
+            appendMessage('bot', data.reply);
+            chatHistory.push({ role: 'user', content: userText });
+            chatHistory.push({ role: 'assistant', content: data.reply });
+            sessionStorage.setItem('chat_msg_count', String(count + 1));
+          } else {
+            throw new Error('no reply');
+          }
+        } else {
+          throw new Error('http ' + res.status);
+        }
+      } catch (_err) {
+        /* Remove typing indicator if still present */
+        if (typingDiv.parentNode) typingDiv.remove();
+        const errMsg = lang === 'en'
+          ? 'An error occurred. Please try again in a moment.'
+          : "Une erreur s’est produite. Réessayez dans un instant.";
+        appendMessage('bot', errMsg);
+      } finally {
+        chatLoading = false;
+        chatSend.disabled = false;
+        chatMsgs.scrollTop = chatMsgs.scrollHeight;
+      }
+    }
+
+    /* EVENT LISTENERS */
+    chatSend.addEventListener('click', sendChatMessage);
+    chatInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        sendChatMessage();
+      }
+    });
+  })();
+
 })();
