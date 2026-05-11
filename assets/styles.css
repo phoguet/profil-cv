@@ -123,33 +123,41 @@ a:hover { color: var(--accent-light); }
   z-index: 0;
 }
 
-/* ---- Name banner (full width top strip) ---- */
+/* ---- Name banner — stacked editorial ---- */
 .hero-bg-name {
   position: absolute;
   top: 48px;
   left: 0;
-  right: 0;
-  width: 100%;
-  transform: none;
-  display: flex;
-  flex-direction: row;
-  gap: 0.3em;
-  justify-content: center;
-  align-items: center;
   width: 34%;
-  padding: 18px 24px;
-  font-family: var(--font-serif);
-  font-size: clamp(28px, 3.2vw, 48px);
-  font-weight: 700;
+  padding: 16px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  align-items: flex-start;
   line-height: 1;
-  letter-spacing: -1px;
-  color: rgba(255, 255, 255, 0.92);
-  background: rgba(6, 11, 24, 0.55);
-  backdrop-filter: blur(6px);
   user-select: none;
   pointer-events: none;
   z-index: 20;
-  white-space: nowrap;
+}
+
+.hero-bg-name span:first-child {
+  font-family: var(--font-sans);
+  font-size: clamp(13px, 1.2vw, 18px);
+  font-weight: 300;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.58);
+  letter-spacing: 2px;
+  line-height: 1;
+}
+
+.hero-bg-name span:last-child {
+  font-family: var(--font-sans);
+  font-size: clamp(38px, 4.8vw, 68px);
+  font-weight: 800;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.93);
+  letter-spacing: -2px;
+  line-height: 0.9;
 }
 
 /* ---- Main layout ---- */
