@@ -3,7 +3,7 @@
 ## Identité
 - Titre : Directeur de Projet, Transformation Numérique & Intelligence Artificielle
 - Email : phoguet@protonmail.com
-- Tél : +33 6 46 20 55 26
+- Tél : [disponible sur demande]
 - LinkedIn : https://www.linkedin.com/pub/pascal-hoguet/a/6a4/1a4
 - Poste actuel : Onepoint (depuis 2019)
 
@@ -32,7 +32,7 @@ J'accompagne également les territoires dans leur transformation numérique et p
 - Nocode & Plateformes
 - Plateformes agentiques
 - Automatisations
-- Vibe coding & vibe designing
+- Vibe coding & vibe designing (développement et design assistés par IA)
 
 ### Territoires intelligents & durables
 - Gouvernance data et IA
@@ -48,6 +48,8 @@ J'accompagne également les territoires dans leur transformation numérique et p
 - Développement business et pilotage d'affaires.
 
 **Directeur de projet — Territoires intelligents et durables** (depuis 2019)
+
+> Ces deux rôles sont exercés en parallèle depuis janvier 2026.
 - Développement de la communauté Sustainable Cities & Places, pilotage des appels d'offres, construction de l'offre plateforme de données territoriales et IA (partenariats, business plan) et numérique responsable.
 - Direction de projet, pilotage des programmes et conseil.
 - Réalisations : Val Parisis (cadrage TICD), Saint-Quentin-en-Yvelines (smart territoire), Châlons-en-Champagne (direction de programme Connecte Châlons), Grand Reims (AMO hyperviseur et GMAO), La Rochelle (programme zéro carbone), Angers Loire Métropole, Mairie de Paris (feuille de route numérique), Gironde Numérique (plateforme de données).
@@ -83,6 +85,7 @@ J'accompagne également les territoires dans leur transformation numérique et p
 ### AIS Ouest — Nantes, 2005–2009
 
 **Directeur des opérations**
+- Direction des opérations, pilotage des équipes et de la production
 
 ---
 
@@ -98,6 +101,7 @@ J'accompagne également les territoires dans leur transformation numérique et p
 ### Alcatel TITN Answare — Strasbourg, 1993–1995
 
 **Chargé de projet**
+- Chargé de projet, développement de solutions logicielles
 
 ---
 
@@ -123,6 +127,12 @@ J'accompagne également les territoires dans leur transformation numérique et p
 
 ## Ce que je recherche
 
-**CDI :** Directeur de programme, CDO, expert IA
+**CDI :** Directeur de programme, CDO, expert IA — à un niveau senior correspondant à plus de 30 ans d'expérience en management et transformation numérique.
 
-**Mission conseil :** consultant expert indépendant en transformation numérique et IA
+**Mission conseil :** consultant expert indépendant en transformation numérique et IA.
+
+**Mode de travail :** flexible, combinant présentiel et télétravail selon les contraintes du projet et de l'organisation.
+
+**Secteurs de prédilection :** public et privé — collectivités territoriales, opérateurs, grandes entreprises en transformation numérique.
+
+Je cherche des environnements où l'expertise senior est valorisée, avec un rôle à impact : piloter des programmes complexes, accompagner la montée en compétences des équipes et contribuer à la stratégie.
