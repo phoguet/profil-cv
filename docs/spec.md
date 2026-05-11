@@ -150,6 +150,36 @@ Les `span.stat-number` dont le contenu commence par un chiffre (25+, 50+) sont a
 
 ---
 
+## Chatbot conversationnel
+
+Widget flottant alimenté par Claude Haiku 3.5 (API Anthropic), limité aux questions sur le CV.
+
+### Architecture
+
+```
+Navigateur → POST /api/chat → Vercel Function → Claude Haiku 3.5
+```
+
+- **`api/chat.js`** : fonction serverless Vercel, endpoint `POST /api/chat`
+- **`assets/cv-data.md`** : base de connaissance exclusive du chatbot (markdown pur, FR uniquement)
+- Clé API : variable d'environnement `ANTHROPIC_API_KEY` (jamais dans le code)
+
+### Comportement
+
+- Widget fixe bottom-right (`z-index: 200`), s'ouvre/ferme par clic
+- Langue automatique : suit le toggle FR/EN de la page
+- Scope restreint : le system prompt interdit les réponses hors CV
+- Rate limiting : 10 messages/session via `sessionStorage` — au-delà, input désactivé
+- Historique : 6 derniers échanges envoyés à chaque requête (`max_tokens: 400`)
+
+### Maintenance
+
+- Toute modification du contenu CV doit être répercutée dans `assets/cv-data.md`
+- Le numéro de téléphone n'est PAS dans `cv-data.md` (remplacé par `[disponible sur demande]`)
+- Pour tester en local : `vercel dev` + `.env.local` contenant `ANTHROPIC_API_KEY=sk-ant-...`
+
+---
+
 ## Déploiement
 
 | Élément | Détail |
@@ -158,4 +188,5 @@ Les `span.stat-number` dont le contenu commence par un chiffre (25+, 50+) sont a
 | Hébergement | Vercel (import depuis GitHub) |
 | URL cible | `profil-cv.vercel.app` ou domaine personnalisé |
 | Déploiement | Automatique à chaque push sur `main` |
-| Build | Aucun (HTML statique pur) |
+| Build | Aucun (HTML statique + fonctions serverless) |
+| Variable d'env requise | `ANTHROPIC_API_KEY` dans Vercel Dashboard → Settings → Environment Variables |
