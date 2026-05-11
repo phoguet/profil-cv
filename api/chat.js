@@ -2,34 +2,93 @@ const fs = require('fs')
 const path = require('path')
 const Anthropic = require('@anthropic-ai/sdk')
 
+// ── 1. Server-side rate limiting (in-memory, 20 req/hour per IP) ──────────────
+const rateLimitMap = new Map()
+const RATE_LIMIT_MAX = 20
+const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000
+
+function checkRateLimit(ip) {
+  const now = Date.now()
+  const entry = rateLimitMap.get(ip)
+  if (!entry || now > entry.resetTime) {
+    rateLimitMap.set(ip, { count: 1, resetTime: now + RATE_LIMIT_WINDOW_MS })
+    return true
+  }
+  if (entry.count >= RATE_LIMIT_MAX) return false
+  entry.count++
+  return true
+}
+
+// ── 4. Prompt injection detection ─────────────────────────────────────────────
+const INJECTION_PATTERNS = [
+  /ignore\s+(les\s+)?instructions/i,
+  /oublie\s+(les\s+)?instructions/i,
+  /forget\s+(your\s+|all\s+|previous\s+)?instructions/i,
+  /ignore\s+(previous|prior|all)/i,
+  /system\s*prompt/i,
+  /tu\s+es\s+maintenant/i,
+  /you\s+are\s+now/i,
+  /nouveau\s+r.le/i,
+  /new\s+role/i,
+  /jailbreak/i,
+]
+
+function hasInjection(text) {
+  return INJECTION_PATTERNS.some(p => p.test(text))
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+
 module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*')
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS')
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
 
-  if (req.method === 'OPTIONS') {
-    return res.status(200).end()
-  }
+  if (req.method === 'OPTIONS') return res.status(200).end()
+  if (req.method !== 'POST') return res.status(405).json({ error: 'Method Not Allowed' })
 
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method Not Allowed' })
+  // 1. Rate limit by IP
+  const ip = (req.headers['x-forwarded-for'] || '').split(',')[0].trim()
+    || req.socket?.remoteAddress
+    || 'unknown'
+  if (!checkRateLimit(ip)) {
+    return res.status(429).json({ error: 'Trop de requêtes. Réessayez dans une heure.' })
   }
 
   try {
     const { message, language, history = [] } = req.body
 
+    // Message validation
     if (!message || typeof message !== 'string') {
       return res.status(400).json({ error: 'Le champ "message" est requis.' })
     }
-
-    if (message.length > 2000) {
+    if (message.length > 500) {
       return res.status(400).json({ error: 'Message trop long.' })
     }
+
+    // 4. Prompt injection check
+    if (hasInjection(message)) {
+      return res.status(400).json({ error: 'Message non valide.' })
+    }
+
+    // 2. Language whitelist — jamais interpolé directement depuis le client
+    const lang = language === 'en' ? 'anglais' : 'français'
+
+    // 3. History validation : rôles stricts + longueur max par entrée
+    const MAX_ENTRY_LENGTH = 500
+    const recentHistory = Array.isArray(history)
+      ? history
+          .filter(m =>
+            (m.role === 'user' || m.role === 'assistant') &&
+            typeof m.content === 'string' &&
+            m.content.length <= MAX_ENTRY_LENGTH
+          )
+          .slice(-6)
+      : []
 
     const cvPath = path.join(__dirname, '../assets/cv-data.md')
     const cvContent = fs.readFileSync(cvPath, 'utf-8')
 
-    const lang = language === 'en' ? 'anglais' : 'français'
     const today = new Date().toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })
 
     const systemPrompt = `Tu es l'assistant IA de Pascal Hoguet.
@@ -44,24 +103,13 @@ Format : texte brut uniquement — aucun markdown, aucun astérisque, aucun tire
 === CONTENU DU CV ===
 ${cvContent}`
 
-    const recentHistory = Array.isArray(history)
-      ? history
-          .filter(m => (m.role === 'user' || m.role === 'assistant') && typeof m.content === 'string')
-          .slice(-6)
-      : []
-
-    const messages = [
-      ...recentHistory,
-      { role: 'user', content: message }
-    ]
-
     const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
 
     const response = await client.messages.create({
       model: 'claude-haiku-4-5',
       max_tokens: 400,
       system: systemPrompt,
-      messages
+      messages: [...recentHistory, { role: 'user', content: message }],
     })
 
     const reply = response.content?.[0]?.text ?? ''
