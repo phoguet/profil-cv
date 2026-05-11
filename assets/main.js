@@ -208,8 +208,8 @@
     /* INIT */
     syncPlaceholder();
 
-    const welcomeFr = 'Bonjour ! Je peux répondre à vos questions sur le parcours et les compétences de Pascal Hoguet.';
-    const welcomeEn = "Hello! I can answer questions about Pascal Hoguet’s background and skills.";
+    const welcomeFr = `Bonjour ! Je suis l'assistant IA de Pascal Hoguet. Je peux répondre à vos questions sur son parcours et ses compétences.`;
+    const welcomeEn = `Hello! I'm Pascal Hoguet's AI assistant. I can answer questions about his background and skills.`;
     appendMessage('bot', getActiveLang() === 'en' ? welcomeEn : welcomeFr);
 
     /* OPEN / CLOSE */

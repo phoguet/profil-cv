@@ -31,7 +31,7 @@ module.exports = async function handler(req, res) {
 
     const lang = language === 'en' ? 'anglais' : 'français'
 
-    const systemPrompt = `Tu es l'assistant CV de Pascal Hoguet.
+    const systemPrompt = `Tu es l'assistant IA de Pascal Hoguet.
 Tu réponds UNIQUEMENT aux questions sur son parcours professionnel, ses compétences, ses expériences, ses projets et sa disponibilité.
 Pour toute autre question, décline poliment et invite à consulter le CV ou à contacter Pascal directement.
 Réponds en ${lang} selon la langue demandée (fr = français, en = anglais).
