@@ -126,29 +126,39 @@ a:hover { color: var(--accent-light); }
 /* ---- Name banner — magazine cover ---- */
 .hero-bg-name {
   position: absolute;
-  top: 0;
+  top: 50%;
+  transform: translateY(-50%);
   left: 0;
   width: 34%;
-  padding: 16px 20px 0;
+  padding: 0 20px;
   display: flex;
   flex-direction: column;
   gap: 0;
   align-items: flex-start;
-  overflow: hidden;
   user-select: none;
   pointer-events: none;
   z-index: 1; /* behind the photo */
 }
 
-.hero-bg-name span:first-child,
+.hero-bg-name span:first-child {
+  font-family: var(--font-sans);
+  font-size: clamp(22px, 4vw, 58px);
+  font-weight: 800;
+  text-transform: lowercase;
+  color: rgba(255, 255, 255, 0.88);
+  letter-spacing: -1px;
+  line-height: 0.9;
+  white-space: nowrap;
+}
+
 .hero-bg-name span:last-child {
   font-family: var(--font-sans);
-  font-size: clamp(44px, 8vw, 115px);
+  font-size: clamp(22px, 4vw, 58px);
   font-weight: 800;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.90);
-  letter-spacing: -3px;
-  line-height: 0.88;
+  color: rgba(255, 255, 255, 0.88);
+  letter-spacing: -1px;
+  line-height: 0.9;
   white-space: nowrap;
 }
 
