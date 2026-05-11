@@ -123,41 +123,31 @@ a:hover { color: var(--accent-light); }
   z-index: 0;
 }
 
-/* ---- Name banner — stacked editorial ---- */
+/* ---- Name banner — magazine cover ---- */
 .hero-bg-name {
   position: absolute;
-  top: 48px;
+  top: 0;
   left: 0;
-  width: 34%;
-  padding: 16px 24px;
+  width: 58%;
+  padding: 18px 28px 0;
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 0;
   align-items: flex-start;
-  line-height: 1;
   user-select: none;
   pointer-events: none;
-  z-index: 20;
+  z-index: 1; /* behind the photo */
 }
 
-.hero-bg-name span:first-child {
-  font-family: var(--font-sans);
-  font-size: clamp(13px, 1.2vw, 18px);
-  font-weight: 300;
-  font-style: italic;
-  color: rgba(255, 255, 255, 0.58);
-  letter-spacing: 2px;
-  line-height: 1;
-}
-
+.hero-bg-name span:first-child,
 .hero-bg-name span:last-child {
   font-family: var(--font-sans);
-  font-size: clamp(38px, 4.8vw, 68px);
+  font-size: clamp(64px, 12.5vw, 175px);
   font-weight: 800;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.93);
-  letter-spacing: -2px;
-  line-height: 0.9;
+  color: rgba(255, 255, 255, 0.90);
+  letter-spacing: -4px;
+  line-height: 0.88;
 }
 
 /* ---- Main layout ---- */
