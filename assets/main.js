@@ -210,23 +210,31 @@
 
     const welcomeFr = `Bonjour ! Je suis l'assistant IA de Pascal Hoguet. Je peux répondre à vos questions sur son parcours et ses compétences.`;
     const welcomeEn = `Hello! I'm Pascal Hoguet's AI assistant. I can answer questions about his background and skills.`;
-    appendMessage('bot', getActiveLang() === 'en' ? welcomeEn : welcomeFr);
+    let welcomeMsg = null;
 
     /* OPEN / CLOSE */
     chatToggle.addEventListener('click', () => {
       const isOpen = chatPanel.classList.toggle('open');
-      if (isOpen) chatInput.focus();
+      if (isOpen) {
+        if (!welcomeMsg) {
+          welcomeMsg = appendMessage('bot', getActiveLang() === 'en' ? welcomeEn : welcomeFr);
+        }
+        chatInput.focus();
+      }
     });
 
     chatClose.addEventListener('click', () => {
       chatPanel.classList.remove('open');
     });
 
-    /* SYNC PLACEHOLDER when lang toggle changes — second independent listener */
+    /* SYNC PLACEHOLDER + welcome message when lang toggle changes */
     document.querySelectorAll('.lang-toggle button').forEach(btn => {
       btn.addEventListener('click', () => {
         /* setLang() runs first (registered earlier), so currentLang is already updated */
         syncPlaceholder();
+        if (chatHistory.length === 0 && welcomeMsg) {
+          welcomeMsg.textContent = getActiveLang() === 'en' ? welcomeEn : welcomeFr;
+        }
       });
     });
 
