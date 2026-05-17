@@ -822,6 +822,7 @@ footer p {
   /* Titre + contenu juste sous la photo, pleine largeur */
   .hero-right {
     padding: 20px 32px 48px;
+    margin-top: -2cm;
   }
 
   .hero-stats { max-width: 100%; }
