@@ -136,9 +136,10 @@ a:hover { color: var(--accent-light); }
   left: 0;
   right: 0;
   display: flex;
-  flex-direction: column;
-  gap: 6px;
+  flex-direction: row;
+  gap: 10px;
   align-items: center;
+  justify-content: center;
   user-select: none;
   pointer-events: none;
   z-index: 1; /* behind the photo */
