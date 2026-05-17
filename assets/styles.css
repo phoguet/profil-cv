@@ -132,7 +132,7 @@ a:hover { color: var(--accent-light); }
 /* ---- Name banner — magazine cover ---- */
 .hero-bg-name {
   position: absolute;
-  bottom: calc(8% + 3cm);
+  bottom: calc(8% + 5cm);
   left: 0;
   right: 0;
   display: flex;
