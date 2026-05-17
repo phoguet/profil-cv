@@ -2,7 +2,7 @@
 
 ## Identité
 - Date de naissance : 27 décembre 1966
-- Titre : Directeur de Projet, Transformation Numérique & Intelligence Artificielle
+- Titre : Directeur de Projet, Expert en Transformation Numérique & Intelligence Artificielle
 - Email : phoguet@protonmail.com
 - Tél : +33 6 46 20 55 26
 - LinkedIn : https://www.linkedin.com/pub/pascal-hoguet/a/6a4/1a4
@@ -10,15 +10,13 @@
 
 ## Profil
 
-Je suis manager senior avec un double savoir-faire en développement business et pilotage de P&L, associé à une solide expertise en numérique et innovation.
+Manager senior, je suis expert des programmes de transformation numérique des organisations publiques et privées. Je vous apporte une expertise spécifique sur la donnée, l'intelligence artificielle, les usages métier et la création de valeur avec l'IA.
 
-J'accélère le développement commercial, mets en place les partenariats stratégiques et facilite le recrutement. Je déploie les services pour répondre aux engagements. J'interviens directement auprès de nos clients en conseil et direction de projet, ainsi qu'en formation et séminaires.
+Je pilote actuellement la roadmap AI for consulting de Onepoint. Je construis les offres, pilote les équipes opérationnelles et les engagements contractuels et financiers des projets.
 
-Je suis expert des programmes de transformation numérique des organisations publiques et privées. J'apporte une expertise spécifique sur la donnée, l'intelligence artificielle, les usages métier et la création de valeur avec l'IA.
+Je contribue au développement commercial, aux partenariats stratégiques, au recrutement et à l'organisation des services pour répondre aux engagements.
 
-Je pilote actuellement la roadmap AI for consulting de Onepoint qui a pour ambition la transformation du métier du conseil par la mise à disposition d'une plateforme agentique au service des consultants. Je construis les offres, pilote les équipes opérationnelles et les engagements contractuels et financiers des projets.
-
-J'accompagne également les territoires dans leur transformation numérique et pilote des programmes à impact auprès des acteurs publics et opérateurs privés.
+J'interviens directement auprès de nos clients en conseil et direction de projet, ainsi qu'en formation et séminaires.
 
 ## Compétences
 
@@ -48,7 +46,7 @@ J'accompagne également les territoires dans leur transformation numérique et p
 - Pilotage de la roadmap de la plateforme agentique « AI for consulting » (programme Elio) pour accompagner la transformation du métier du conseil — définition du business model, démarche Continuous Discovery + Delivery, cas d'usage, mesure de la valeur, pilotage des équipes AI studio.
 - Développement business et pilotage d'affaires.
 
-**Directeur de projet — Territoires intelligents et durables** (depuis 2019)
+**Directeur de projet et expert — Territoires intelligents et durables** (depuis 2019)
 
 > Ces deux rôles sont exercés en parallèle depuis janvier 2026.
 - Développement de la communauté Sustainable Cities & Places, pilotage des appels d'offres, construction de l'offre plateforme de données territoriales et IA (partenariats, business plan) et numérique responsable.
@@ -86,7 +84,7 @@ J'accompagne également les territoires dans leur transformation numérique et p
 ### AIS Ouest — Nantes, 2005–2009
 
 **Directeur des opérations**
-- Direction des opérations, pilotage des équipes et de la production
+- Gestion des équipes techniques (80 personnes) et soutien à l'équipe commerciale.
 
 ---
 
