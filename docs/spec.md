@@ -39,11 +39,11 @@ Layout flex desktop : colonne gauche 34% (photo) + colonne droite flex:1 (identi
 
 #### Nom — `.hero-bg-name` (style magazine cover)
 - Élément `<h1>` placé **à l'intérieur de `.hero-left`** (référentiel = colonne gauche)
-- `position: absolute; bottom: calc(8% + 1cm); left: 0; right: 0` — couvre toute la largeur de la colonne, centré horizontalement
+- `position: absolute; bottom: calc(8% + 5cm); left: 0; right: 0` — couvre toute la largeur de la colonne, centré horizontalement
 - `z-index: 1` — derrière le portrait (`.hero-photo-wrap` est à `z-index: 2`)
-- `align-items: center; flex-direction: column; gap: 6px`
-- Span 1 "Pascal" : Inter 800, `clamp(22px, 4vw, 58px)`, `text-transform: none`, blanc, `text-shadow: 0 2px 16px rgba(0,0,0,0.7)`
-- Span 2 "Hoguet" : Inter 800, `clamp(22px, 4vw, 58px)`, `text-transform: uppercase`, même style
+- `align-items: center; flex-direction: row; gap: 10px; justify-content: center` — **sur une seule ligne** : "Pascal HOGUET"
+- Span 1 "Pascal" : Inter 800, `clamp(18px, 3.2vw, 46px)`, `text-transform: none`, blanc, `text-shadow: 0 2px 16px rgba(0,0,0,0.7)`
+- Span 2 "Hoguet" : Inter 800, `clamp(18px, 3.2vw, 46px)`, `text-transform: uppercase`, même style
 - Pas de fond, pas de backdrop-filter
 
 #### Colonne gauche — `.hero-left`
@@ -53,8 +53,8 @@ Layout flex desktop : colonne gauche 34% (photo) + colonne droite flex:1 (identi
 - `<canvas id="hero-particles">` positionné en absolu — 50 particules bleues double passe, z-index 0
 
 #### Colonne droite — `.hero-right`
-- `padding: 68px 90px 32px 16px` (90px à droite pour dégager le toggle FR/EN)
-- **Titre** : "DIRECTEUR DE PROJET" + "TRANSFORMATION NUMÉRIQUE & INTELLIGENCE ARTIFICIELLE" — Inter 18px, uppercase, letter-spacing 2px, `var(--accent)`
+- `padding: 72px 100px 40px 32px` (100px à droite pour dégager le toggle FR/EN)
+- **Titre** : "DIRECTEUR DE PROJET" + "EXPERT EN TRANSFORMATION NUMÉRIQUE & INTELLIGENCE ARTIFICIELLE" — Inter 18px, uppercase, letter-spacing 2px, `var(--accent)`
 - **Séparateur** : 64px × 2px, dégradé bleu
 - **Accroche** : 3 paragraphes, 14px italic, line-height 1.55
 - **Stats** : 2 blocs — 25+ ans en direction · 50+ projets pilotés (Playfair 32px, compteurs animés au scroll)
@@ -136,9 +136,9 @@ Les `span.stat-number` dont le contenu commence par un chiffre (25+, 50+) sont a
 
 | Breakpoint | Comportement |
 |---|---|
-| `> 900px` | Desktop : layout 2 colonnes, nom en bandeau absolu sur colonne gauche |
-| `≤ 900px` | Tablet : layout colonne unique, nom en bandeau relatif pleine largeur en haut, puis photo, puis contenu |
-| `≤ 600px` | Mobile : même structure, tailles et paddings réduits |
+| `> 900px` | Desktop : layout 2 colonnes (34%/flex:1), nom sur une ligne en absolu sur colonne gauche (`bottom: calc(8% + 5cm)`) |
+| `≤ 900px` | Tablet/mobile : `flex-direction: column`, `padding-top: 64px` — nom compact centré au-dessus de la photo, titre (`.hero-right`) juste en dessous de la photo |
+| `≤ 600px` | Mobile : même structure, `padding-top: 56px`, photo `min(200px, 56%)`, paddings réduits |
 
 ---
 
